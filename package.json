@@ -1,0 +1,32 @@
+{
+  "name": "whole-line-stream",
+  "version": "1.0.0",
+  "description": "Pass whole lines to subsequent stream, possibly prefixed",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gagern/whole-line-stream.git"
+  },
+  "keywords": [
+    "transform",
+    "stream",
+    "split",
+    "lines",
+    "prefix",
+    "cache"
+  ],
+  "author": "Martin von Gagern <Martin.vGagern@gmx.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gagern/whole-line-stream/issues"
+  },
+  "homepage": "https://github.com/gagern/whole-line-stream#readme",
+  "devDependencies": {
+    "bl": "^1.0.0",
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4"
+  }
+}
