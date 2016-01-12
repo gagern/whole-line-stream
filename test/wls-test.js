@@ -28,4 +28,30 @@ describe("WholeLineStream", function() {
     expect(out.toString()).to.equal("foo\n");
   });
 
+  it("turns \\r\\n into \\n", function() {
+    var out = bl();
+    var wls = new WholeLineStream();
+    wls.pipe(out);
+    wls.end("foo\r\nbar\r\n");
+    expect(out.toString()).to.equal("foo\nbar\n");
+  });
+
+  it("allows \\r to overwrite the complete line", function() {
+    var out = bl();
+    var wls = new WholeLineStream();
+    wls.pipe(out);
+    wls.write("foo\r");
+    wls.end("bar\n");
+    expect(out.toString()).to.equal("bar\n");
+  });
+
+  it("allows \\r to overwrite part of the line", function() {
+    var out = bl();
+    var wls = new WholeLineStream();
+    wls.pipe(out);
+    wls.write("foo and baz\r");
+    wls.end("bar\nqux\n");
+    expect(out.toString()).to.equal("bar and baz\nqux\n");
+  });
+
 });

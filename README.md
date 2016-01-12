@@ -27,6 +27,17 @@ git.stdout.pipe(new WholeLineStream("[git]   ")).pipe(process.stdout);
 git.stderr.pipe(new WholeLineStream("[git]   ")).pipe(process.stderr);
 ```
 
+## Carriage returns
+
+The carriage return character `\r` is interpreted as moving the cursor
+back to the beginning of the current line.
+Subsequent output will overwrite the initial portion of the line.
+This is used e.g. by [some Mocha reporters][mocha1].
+The output of this stream will never contain `\r`.
+This also means that Windows-style `\r\n` will get turned into plain `\n`.
+
+[mocha1]: https://github.com/mochajs/mocha/blob/65e298416fdef2f3d40bff911b308289be5b42aa/lib/reporters/base.js#L151
+
 ## API
 
 ### new WholeLineStream([prefix])
