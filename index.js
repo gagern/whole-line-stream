@@ -8,9 +8,15 @@ var Transform = stream.Transform;
 var NL = 10;
 var CR = 13;
 
+function asBuffer(obj) {
+  if (Buffer.isBuffer(obj)) return obj;
+  if (Buffer.from) return Buffer.from(obj);
+  return new Buffer(String(obj));
+}
+
 function WholeLineStream(prefix) {
   Transform.call(this);
-  this.prefix = prefix ? Buffer(prefix) : null;
+  this.prefix = prefix ? asBuffer(prefix) : null;
   this.queued = null;
   this.tail = null;
 }
@@ -56,7 +62,7 @@ WholeLineStream.prototype._transform = function(chunk, encoding, done) {
 
 WholeLineStream.prototype._flush = function(done) {
   if(this.queued)
-    this._transform(new Buffer("\n"), null, done);
+    this._transform(asBuffer("\n"), null, done);
   else
     done();
 }

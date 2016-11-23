@@ -54,4 +54,23 @@ describe("WholeLineStream", function() {
     expect(out.toString()).to.equal("bar and baz\nqux\n");
   });
 
+  it("appends a prefix to each line", function() {
+    var out = bl();
+    var wls = new WholeLineStream("[foo] ");
+    wls.pipe(out);
+    wls.write("bar\nbaz");
+    wls.end("\rqu\n");
+    expect(out.toString()).to.equal("[foo] bar\n[foo] quz\n");
+  });
+
+  it("allows passing a buffer as prefix", function() {
+    var out = bl();
+    var prefix = new Buffer("[foo] ");
+    var wls = new WholeLineStream(prefix);
+    wls.pipe(out);
+    wls.write("bar\nbaz");
+    wls.end("\rqu\n");
+    expect(out.toString()).to.equal("[foo] bar\n[foo] quz\n");
+  });
+
 });
