@@ -1,6 +1,6 @@
 {
   "name": "whole-line-stream",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pass whole lines to subsequent stream, possibly prefixed",
   "main": "index.js",
   "scripts": {
