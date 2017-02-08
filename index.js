@@ -10,7 +10,7 @@ var CR = 13;
 
 function asBuffer(obj) {
   if (Buffer.isBuffer(obj)) return obj;
-  if (Buffer.from) return Buffer.from(obj);
+  if (Buffer.alloc) return Buffer.from(obj);
   return new Buffer(String(obj));
 }
 
